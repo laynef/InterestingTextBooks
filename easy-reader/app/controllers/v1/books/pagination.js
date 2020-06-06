@@ -5,12 +5,12 @@ const libraryPath = path.join(__dirname, '..', '..', '..', '..', '..', 'lib');
 
 module.exports = (req, res) => {
     const { page = 1, lines_per_page = 10000 } = req.query;
-    const { filename } = req.params;
+    const { file_name } = req.params;
 
     if (page <= 0) return res.status(404).json({ error: `Page not found` });
     if (lines_per_page <= 0 || lines_per_page > 20000) return res.status(400).json({ error: `Lines per page must be between 1 and 20000` });
 
-    const srcPath = path.join(libraryPath, filename);
+    const srcPath = path.join(libraryPath, file_name);
     const plainText = fs.readFileSync(srcPath, { encoding: 'utf8' });
     const array = plainText.split(`\n`);
 

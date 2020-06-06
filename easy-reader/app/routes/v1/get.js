@@ -15,21 +15,24 @@ const { v1 } = require('../../controllers');
 
 module.exports = [
     {
-        route: '/full-text/:filename',
+        route: '/full-text/:file_name',
         controller: v1.books.getOne,
         middleware: [],
         description: '',
+        ignore: true,
     },
     {
-        route: '/books/:filename',
+        route: '/books/:file_name',
         controller: v1.books.pagination,
         middleware: [],
         description: '',
+        ignore: true,
     },
     {
         route: '/list-books',
         controller: v1.books.list,
         middleware: [],
         description: '',
+        ignore: true,
     },
 ];

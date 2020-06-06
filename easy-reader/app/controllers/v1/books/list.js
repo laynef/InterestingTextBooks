@@ -5,12 +5,12 @@ const { startCase } = require('lodash');
 const libraryPath = path.join(__dirname, '..', '..', '..', '..', '..', 'lib');
 
 module.exports = (req, res) => {
-    const data = fs.readdirSync(libraryPath).map(filename => {
+    const data = fs.readdirSync(libraryPath).map(file_name => {
         const [prefix] = filename.split('.txt');
         const title = startCase(prefix);
-        const url = `/lib/${filename}`;
-        
-        return { title, filename, url };
+        const url = `/lib/${file_name}`;
+
+        return { title, file_name, url };
     });
 
     const count = data.length;
