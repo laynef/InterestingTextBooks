@@ -1,19 +1,27 @@
-const fs = require('fs');
-const path = require('path');
+const repl = require('repl');
+const { combineTextFiles } = require('./utils');
 
-const combineTextFiles = (directoryName, bookName) => {
-    // Paths
-    const rootPath = path.join(__dirname, 'src', directoryName);
-    const distPath = path.join(__dirname, 'lib', bookName + '.txt');
-    // File System options
-    const options = { encoding: 'utf8' };
-    // Initial text file
-    fs.writeFileSync(distPath, '', options);
-    // Combine text file
-    fs.readdirSync(rootPath).forEach(filename => {
-        const filePath = path.join(rootPath, filename);
-        fs.writeFileSync(distPath, fs.readFileSync(distPath, options) + '\n' + fs.readFileSync(filePath, options));
-    });
+
+const options = { 
+    useColors: true,
+    prompt: '> '
 };
 
-combineTextFiles('PAGE001004GUIDE', 'FortuneInFormulas')
+const replServer = repl.start(options);
+
+replServer.defineCommand('combineTextFiles', {
+    help: `Combine multiple text files into one large text file using the input => directoryNameInSrc:bookTitle
+i.e. FortuneInFormulas1939:FortuneInFormulas
+    `,
+    action(input) {
+        this.clearBufferedCommand();
+        try {
+            const [directoryName, ...rest] = input.split(':');
+            combineTextFiles(directoryName, rest.join(''));
+            console.log('Your book has been created');
+        } catch (error) {
+            console.error('Your book could not be created');
+        }
+        this.displayPrompt();
+    }
+});
