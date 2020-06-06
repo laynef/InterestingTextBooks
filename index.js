@@ -11,8 +11,7 @@ const replServer = repl.start(options);
 
 replServer.defineCommand('combineTextFiles', {
     help: `Combine multiple text files into one large text file using the input => directoryNameInSrc:bookTitle
-i.e. FortuneInFormulas1939:FortuneInFormulas
-    `,
+i.e. FortuneInFormulas1939:FortuneInFormulas`,
     action(input) {
         this.clearBufferedCommand();
         try {
