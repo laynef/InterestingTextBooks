@@ -11,7 +11,7 @@ class ClientFileReader extends React.Component {
     render() {
         const { htmlText } = this.props;
         return (
-            <div>
+            <div className="w-100">
                 <div dangerouslySetInnerHTML={{ __html: htmlText }} />
             </div>
         )

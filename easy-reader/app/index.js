@@ -79,6 +79,8 @@ if (!process.env.TESTING) {
 
 app.use('/assets', Express.static(path.join(__dirname, 'assets')));
 app.use('/', Express.static(path.join(__dirname, 'assets', 'dist')));
+app.use('/lib', Express.static(path.join(__dirname, '..', '..', 'lib')));
+app.use('/archive', Express.static(path.join(__dirname, '..', '..', 'archive')));
 
 app.use(parser.urlencoded({ extended: false }));
 app.use(parser.json());
