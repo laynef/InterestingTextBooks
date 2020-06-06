@@ -1,0 +1,10 @@
+/* Connected to route only */
+#app, html, body, .app {
+    width: 100vw;
+    height: 100vh;
+}
+
+.scroll-container {
+    overflow: auto;
+    overflow-x: hidden;
+}
