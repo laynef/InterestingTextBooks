@@ -4,14 +4,26 @@ import { getBookTitles, getFullText } from '../redux/actions/books';
 import { startCase } from 'lodash';
 
 
-function Header({ dispatch, titles }) {
-    React.useCallback(() => {
-        getBookTitles(dispatch);
-    }, [dispatch, titles]);
+function Header({ dispatch }) {
+    let [titles, setTitles] = React.useState(false);
+    let [effect, setEffect] = React.useState(false);
+
+    async function fetchData() {
+        try {
+            const { data } = await getBookTitles(dispatch);
+            setTitles(data);
+        } catch (error) {
+            setEffect(!effect);
+        }
+    }
+
+    React.useEffect(() => {
+        fetchData();
+    }, [effect]);
 
     return (
         <div className="w-100 bg-white h-5">
-            {!!titles && Array.isArray(titles.data) && titles.data.map((e, i) => (
+            {Array.isArray(titles) && titles.map((e, i) => (
                 <p key={i} className="text-black" onClick={() => getFullText(dispatch, e.file_name)}>
                     {startCase(e.title)}
                 </p>
