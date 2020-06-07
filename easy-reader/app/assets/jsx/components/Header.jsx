@@ -4,35 +4,20 @@ import { getBookTitles, getFullText } from '../redux/actions/books';
 import { startCase } from 'lodash';
 
 
-class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
-    componentDidMount() {
-        const { dispatch } = this.props;
+function Header({ dispatch, titles }) {
+    React.useCallback(() => {
         getBookTitles(dispatch);
-    }
+    }, [dispatch, titles]);
 
-    fetchBookData = (file_name) => {
-        const { dispatch } = this.props;
-        getFullText(dispatch, file_name);
-    }
-
-    render() {
-        const { titles } = this.props;
-        return (
-            <div className="w-100 bg-white h-5">
-                {Array.isArray(titles) && titles.map((e, i) => (
-                    <div key={i} className="link" onClick={() => this.fetchBookData(e.file_name)}>
-                        {startCase(e.title)}
-                    </div>
-                ))}
-            </div>
-        )
-    }
-
+    return (
+        <div className="w-100 bg-white h-5">
+            {!!titles && Array.isArray(titles.data) && titles.data.map((e, i) => (
+                <p key={i} className="text-black" onClick={() => getFullText(dispatch, e.file_name)}>
+                    {startCase(e.title)}
+                </p>
+            ))}
+        </div>
+    )
 }
 
 export default connect((state) => ({

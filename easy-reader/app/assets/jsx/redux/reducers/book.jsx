@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 }
 
 export default function(state = INITIAL_STATE, action) {
-    const type = actionTypes.find(e => e === action && action.type);
+    const type = actionTypes.find(e => e === action.type);
     if (type && action && action.payload) state = action.payload;
     return state;
 }

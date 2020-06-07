@@ -5,6 +5,8 @@ import Header from '../components/Header';
 
 class Application extends Component {
     render() {
+        if (typeof window === 'undefined') return null;
+        
         return (
             <div className="app bg-light">
                 <Header />
