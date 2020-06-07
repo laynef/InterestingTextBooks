@@ -17,7 +17,7 @@
     "license": "MIT License",
     "dependencies": {
         "@awaitjs/express": "^0.3.0",
-        "axios": "^0.18.0",
+        "axios": "^0.18.1",
         "babel-polyfill": "6.26.0",
         "bcrypt-nodejs": "0.0.3",
         "bluebird": "^3.5.5",
