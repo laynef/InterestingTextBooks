@@ -8,7 +8,7 @@ export const axiosGet = async (dispatch, actionName, url) => {
     const headers = { 'X-CSRF-Token': getCSRFToken() };
     dispatch({ type: actionName + '_PENDING', payload: payload });
     try {
-        const { data } = await axios.get('/api/v1' + url, { headers });
+        const { data } = await axios.get('/api/v1' + url);
         payload.pending = null;
         payload.data = data;
         dispatch({ type: actionName + '_SUCCESS', payload: payload });

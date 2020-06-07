@@ -6,7 +6,7 @@ const libraryPath = path.join(__dirname, '..', '..', '..', '..', '..', 'lib');
 
 module.exports = (req, res) => {
     const data = fs.readdirSync(libraryPath).map(file_name => {
-        const [prefix] = filename.split('.txt');
+        const [prefix] = file_name.split('.txt');
         const title = startCase(prefix);
         const url = `/lib/${file_name}`;
 
