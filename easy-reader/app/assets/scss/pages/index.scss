@@ -9,6 +9,11 @@
     overflow-x: hidden;
 }
 
+.header {
+    position: fixed;
+    z-index: 9999;
+}
+
 .h-5 {
     height: 5% !important;
 }
